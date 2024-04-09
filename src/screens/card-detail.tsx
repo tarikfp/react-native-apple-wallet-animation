@@ -1,4 +1,3 @@
-import { useRoute } from "@react-navigation/native";
 import React from "react";
 import { StyleSheet, View } from "react-native";
 // @ts-ignore
@@ -8,10 +7,14 @@ import Animated, {
   useSharedValue,
 } from "react-native-reanimated";
 import { DetailCard } from "../components/detail-card";
+import { CardStackScreenProps } from "../cards-stack";
 
-export const CardDetail = () => {
-  const route = useRoute();
-  const { image, id } = (route.params as any).item;
+export const CardDetail = ({
+  route: {
+    params: { item },
+  },
+}: CardStackScreenProps<"CardDetail">) => {
+  const { image, id } = item;
   const scrollY = useSharedValue(0);
 
   const scrollHandler = useAnimatedScrollHandler((event) => {
